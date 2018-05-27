@@ -16,8 +16,8 @@ public class TenhouStreamReader {
 		
 		while(true) {
 			char c = (char)dis.readByte();
-			sb.append(c);
 			if(c == 0) break;
+			sb.append(c);
 		}
 		
 		return sb.toString();
