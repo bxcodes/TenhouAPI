@@ -22,6 +22,8 @@ import org.xml.sax.SAXException;
 
 public class TenhouClient {
 
+	
+	//http://m77.hatenablog.com/entry/2017/05/21/214529
 	public static TenhouClient getClient() {
 		try {
 			TenhouClient client = new TenhouClient();
@@ -76,9 +78,12 @@ public class TenhouClient {
 				
 				this.sendString(a);
 				
-				Thread.sleep(700);
+				//Thread.sleep(700);
 				
 				this.sendString("<PXR V=\"0\" />\0");
+				
+				this.sendString("<CHAT text=\"%2Flobby%204000\" />\0");
+				
 			}
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
@@ -87,9 +92,6 @@ public class TenhouClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
