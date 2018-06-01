@@ -46,14 +46,40 @@ public class GameState {
 		}
 	}
 	
+	public void nextMove(Node n) {
+		String s = n.getNodeName();
+		System.out.println(n.getNodeName());
+		if(s.matches("[T-W][0-9]*")) {
+			int p = s.charAt(0) - 'T';
+			int t = Integer.parseInt(s.substring(1));
+			players[p].hand.add(t);
+		} else if(s.matches("[D-G][0-9]*")) {
+			int p = s.charAt(0) - 'D';
+			int t = Integer.parseInt(s.substring(1));
+			players[p].hand.removeIf(tile -> tile == t);
+			players[p].discardList.add(t);
+			Collections.sort(players[p].hand);
+		}
+		printState();
+	}
+	
 	public void printState() {
-		System.out.println(ba + ":" + honba);
-		System.out.println("dora:" + doraList);
+		//System.out.println(ba + ":" + honba);
+		//System.out.println("dora:" + doraList);
 		for(Player p : players) {
 			System.out.println(p.name);
+			System.out.print("H: ");
 			p.hand.stream().map(TenhouUtil::tileString).forEach(System.out::print);
 			System.out.println();
+			System.out.print("F: ");
+			p.fuuroList.stream().flatMap(List::stream).map(TenhouUtil::tileString).forEach(System.out::print);
+			System.out.println();
+			System.out.print("D: ");
+			p.discardList.stream().map(TenhouUtil::tileString).forEach(System.out::print);
+			System.out.println();
+			
 		}
+		System.out.println("---------------------------------");
 	}
 	
 	
@@ -61,7 +87,6 @@ public class GameState {
 	public int honba;
 	public Player[] players = new Player[4];
 	public List<Integer> doraList = new ArrayList<Integer>();
-	
 	
 	
 	
