@@ -1,6 +1,7 @@
 package com.bxcodes.java.tenhouapi;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.w3c.dom.Node;
@@ -39,6 +40,10 @@ public class GameState {
 		for(String s : hai2) players[2].hand.add(Integer.parseInt(s));
 		String[] hai3 = n.getAttributes().getNamedItem("hai3").getNodeValue().split(",");
 		for(String s : hai3) players[3].hand.add(Integer.parseInt(s));
+		
+		for(Player p : players) {
+			Collections.sort(p.hand);
+		}
 	}
 	
 	public void printState() {
@@ -46,7 +51,8 @@ public class GameState {
 		System.out.println("dora:" + doraList);
 		for(Player p : players) {
 			System.out.println(p.name);
-			System.out.println(p.hand);
+			p.hand.stream().map(TenhouUtil::tileString).forEach(System.out::print);
+			System.out.println();
 		}
 	}
 	

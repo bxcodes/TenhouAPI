@@ -2,6 +2,17 @@ package com.bxcodes.java.tenhouapi;
 
 public class TenhouUtil {
 	
+	public static String tileString(int t) {
+		t /= 4;
+		switch(t / 9) {
+		case 0:return 1 + t % 9 + "m";
+		case 1:return 1 + t % 9 + "p";
+		case 2:return 1 + t % 9 + "s";
+		case 3:return 1 + t % 9 + "z";
+		default: return "";
+		}
+	}
+	
 	public static String decodeAuth(String auth) {
 		int[] table = new int[] {
 			63006, 9570, 49216, 45888,
