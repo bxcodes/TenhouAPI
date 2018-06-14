@@ -1,8 +1,10 @@
 package com.bxcodes.java.tenhouapi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.w3c.dom.Node;
 
@@ -59,6 +61,11 @@ public class GameState {
 			players[p].hand.removeIf(tile -> tile == t);
 			players[p].discardList.add(t);
 			Collections.sort(players[p].hand);
+		} else if(s.equals("N")) {
+			int who = Integer.parseInt(n.getAttributes().getNamedItem("who").getNodeValue());
+			int m = Integer.parseInt(n.getAttributes().getNamedItem("m").getNodeValue());
+			
+			players[who].fuuroList.add(Arrays.stream(TenhouUtil.decodeM(m)).boxed().collect(Collectors.toList()));
 		}
 		printState();
 	}

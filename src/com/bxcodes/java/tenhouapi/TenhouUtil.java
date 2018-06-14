@@ -35,4 +35,64 @@ public class TenhouUtil {
 		
 		return result;
 	}
+	
+	public static int[] decodeM(int val) {
+		int fromWho = val & 0x3;
+		
+		if((val & 0x4) != 0) {
+			// CHI
+	        int t0 = (val >> 3) & 0x3;
+	        int t1 = (val >> 5) & 0x3;
+	        int t2 = (val >> 7) & 0x3;
+	        int baseAndCalled = val >> 10;
+	        int base = (int) Math.floor(baseAndCalled / 3);
+
+	        base = (int) (Math.floor(base / 7) * 9 + base % 7);
+	        int tile0 = t0 + 4 * (base + 0);
+	        int tile1 = t1 + 4 * (base + 1);
+	        int tile2 = t2 + 4 * (base + 2);
+
+	        return new int[] {tile0, tile1, tile2};
+		} else if((val & 0x18) != 0) {
+			int t4 = (val >> 5) & 0x3;
+			int t0 = new int[]{1, 0, 0, 0}[t4];
+			int t1 = new int[]{2, 2, 1, 1}[t4];
+			int t2 = new int[]{3, 3, 3, 2}[t4];
+			int baseAndCalled = val >> 9;
+			int base = (int) Math.floor(baseAndCalled / 3);
+
+	        if ((val & 0x8) != 0) {
+	        	int tile0 = t0 + 4 * base;
+	        	int tile1 = t1 + 4 * base;
+	        	int tile2 = t2 + 4 * base;
+
+	            return new int[]{tile0, tile1, tile2};
+	        } else {
+	        	int tile0 = t0 + 4 * base;
+	        	int tile1 = t1 + 4 * base;
+	        	int tile2 = t2 + 4 * base;
+	        	int tile3 = t4 + 4 * base;
+
+	            return new int[]{tile0, tile1, tile2, tile3};
+	        }
+		} else if((val & 0x20) != 0) {
+			
+		} else {
+			int baseAndCalled = val >> 8;
+			int base = (int) Math.floor(baseAndCalled / 4);
+
+	        int tile0 = 4 * base;
+	        int tile1 = 4 * base + 1;
+	        int tile2 = 4 * base + 2;
+	        int tile3 = 4 * base + 3;
+
+	        return new int[]{tile0, tile1, tile2, tile3};
+	    
+		}
+		
+		
+		
+		
+		return null;
+	}
 }

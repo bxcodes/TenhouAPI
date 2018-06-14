@@ -10,9 +10,8 @@ public class Main {
 	public static void main(String[] args) {
 		//TenhouClient client = TenhouClient.getClient();
 		//client.sendString("<HELO name=\"NoName\" tid=\"f0\" sx=\"M\" />\0");
-		/*
+		
 		File f = new File("e1.mjv.xml");
-		System.out.println(f.exists());
 		
 		TenhouLog log = TenhouLog.getLog(f);
 		
@@ -24,8 +23,11 @@ public class Main {
 		for(Node n : log.games.get(1)) {
 			g.nextMove(n);
 		}
-		*/
 		
+		
+		
+		
+		/*
 		System.out.println(TenhouUtil.tileString(68));
 		
 		System.out.println(Integer.toBinaryString(42031));
@@ -35,7 +37,7 @@ public class Main {
 		System.out.println((42031&0x0180)>>7);
 		System.out.println((42031&0xfc00)>>10);
 		
-		
+		*/
 	}
 	
 
